@@ -1,4 +1,4 @@
-export default function Item({ name, quantity, category } ) {
+export default function Item({ id, name, quantity, category } ) {
     return(
         <main>
             <div className="bg-slate-900 max-w-sm p-2 m-4">

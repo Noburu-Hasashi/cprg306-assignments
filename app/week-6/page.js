@@ -1,24 +1,24 @@
 "use client"
 
 import ItemList from "./item-list";
-import { sortByName } from "./item-list";
-import NewItem from "../week-6/new-item";
+import NewItem from "./new-item";
 import itemsData from "./items.json";
+import { useState } from "react";
 
 
 
 export default function Page() {
     const [items, setItems] = useState(itemsData);
 
-    const handleAddItem = (item) =>{
-      setItems([...items, item]);
+    const handleAddItem = (newItem) => {
+        setItems([...items, newItem]);
     }
 
     return (
-      <main className="bg-slate-950">
+      <main className="bg-slate-950 p-2 m-2">
         <h1 className="text-3xl font-bold m-2">Shopping List</h1>
-        <NewItem onAddItem={handleAddItem} />
-        <ItemList />
+        <NewItem onAddItem={handleAddItem}/>
+        <ItemList items={items}/>
       </main>
     );
   }

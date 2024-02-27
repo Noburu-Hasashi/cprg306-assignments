@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Item from "./item";
 
-export default function NewItem() {
+export default function NewItem({onAddItem}) {
     const [name, setName] = useState("");
     const [quantity, setQuantity] = useState("1");
     const [category, setCategory] = useState("produce");
@@ -10,11 +11,10 @@ export default function NewItem() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const Item = { name, quantity, category };
+        const newId = Math.floor(Math.random() * 1000000);
+        const Item = { id: newId, name, quantity, category };
 
-        console.log(Item);
-
-        alert(`Item: ${Item.name}, Quantity: ${Item.quantity}, Category: ${Item.category}`);
+        onAddItem(Item);
 
         setName("");
         setQuantity("1");
@@ -22,10 +22,11 @@ export default function NewItem() {
     }
 
     return(
-        <main className="flex justify-center w-full">
-           <form onSubmit={handleSubmit} className="p-2 m-4 bg-slate-900 text-black max-w-sm w-full">
-                <div className="mb-2">
-                    <input type="text" placeholder="Item name" value={name} className="w-full mt-1 border-2 border-gray-300 p-2 rounded-lg font-sans" onChange={(event) => setName(event.target.value)} />
+        <main className="flex justify-left w-full">
+           <form onSubmit={handleSubmit} className="p-2 text-black max-w-sm w-full">
+                <h2 className="text-xl font-bold text-white">Add New Item</h2>
+                <div className="mAb-2">
+                    <input type="text" placeholder="Item name" value={name} className="w-full mt-1 border-2 border-gray-300 p-2 mb-2 rounded-lg font-sans" onChange={(event) => setName(event.target.value)} />
                 </div>
                 <div className="flex justify-between">
                     <input type="number" min="1" max="100" placeholder="Quantity" value={quantity}  className="w-20 ml-1 border-2 border-gray-300 p-2 rounded-lg font-sans" onChange={(event) => setQuantity(event.target.value)} />
@@ -45,7 +46,7 @@ export default function NewItem() {
                     </select>
                 </div>
                 <div>
-                    <button type="submit" className="w-full mt-4 py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">+</button>
+                    <button type="submit" className="w-full mt-4 py-2 px-4 mb-6 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">+</button>
                 </div>                 
             </form>
         </main>
